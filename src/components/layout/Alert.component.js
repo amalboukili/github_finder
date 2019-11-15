@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Alert({type, message}) {
-    // const {type, message} = props;
+function Alert({alert, setAlert}) {
+    const { type, message } = alert;
     return message ? (
-        <div className = "container" style= {{marginTop : '15px'}}>
+        <div className = "container">
             <div className = "columns">
                 <div className = "column col-12">
-                    <div class={`toast toast-${type}`}>
-                        <button class="btn btn-clear float-right"></button>
+                    <div className={`toast toast-${type}`}>
+                        <button className="btn btn-clear float-right" onClick = {() => setAlert()}></button>
                         {message}
                     </div>
                 </div>

@@ -8,9 +8,11 @@ export default class Search extends Component {
     mapInputToState = (e) => this.setState({[e.target.name] : e.target.value});
     
     onSearchClick = () => {
-        this.setState({username : ''});
-        this.props.searchUsers(this.state.username);
-    }
+        if (this.state.username) {
+            this.props.searchUsers(this.state.username);
+            this.setState({username : ''});
+        }
+    };
     
     render() {
         return (

@@ -10,7 +10,7 @@ function UsersGrid(props) {
             <div className="container" style={style}>
                 <div className="columns">
                     { users.map((user) => (
-                        <div className="column col-4" style={colStyle}>
+                        <div className="column col-4" style={colStyle} key={user.id}>
                             <UserGridItem user={user} />
                         </div>
                     ))}

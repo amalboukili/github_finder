@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 function UserGridItem(props) {
     const { user } = props;
@@ -21,9 +22,9 @@ function UserGridItem(props) {
                 </div>
             </div>
             <div className="card-footer">
-                <a className="btn btn-primary" href ={user.html_url} >
+                <Link className="btn btn-primary" to={`/user/${user.login}`} >
                     More details
-                </a>
+                </Link>
             </div>
         </div>
     )
