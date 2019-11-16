@@ -1,23 +1,26 @@
-import React, { Component } from 'react';
+import React, { useContext, useEffect } from 'react';
 // import { useHistory } from 'react-router-dom';
-import {withRouter} from 'react-router-dom'
+import {withRouter, useParams, useHistory} from 'react-router-dom'
 import Spinner from '../components/layout/Spinner.component';
 import Repo from '../components/repos/repo.component';
+import GitHubContext from '../context/github/gitHubContext';
 
 
-class UserProfile extends Component{
-    componentDidMount(){
+function UserProfile(){
+    const {login} = useParams();
+    const history= useHistory();
+    const githubContext = useContext(GitHubContext);
+    const {loading, getUser, user, userRepos, getUserRepos} = githubContext;
+
+    useEffect(() => {
         // console.log(this.props);
-        const {login} = this.props.match.params
         if (login){
-            this.props.getUser(login);
-            this.props.getUserRepos(login);
+            getUser(login);
+            getUserRepos(login);
         }
-    }
-    render(){
-        console.log(this.props);
+    }, []); 
+        // console.log(this.props);
         // const history= useHistory();
-        const {loading, user, history, repos} = this.props;
     return loading ? <Spinner /> : (
         <div className="container grid-lg" style={styles.container}>
             <div className="columns">
@@ -76,16 +79,14 @@ class UserProfile extends Component{
                     </div>
                 </div>
                 <div className="column col-12">
-                    {(repos || []).map((repo) => (
+                    {(userRepos || []).map((repo) => (
                         < Repo repo = {repo} key ={repo.id} />
                     ))}
                 </div>
             </div>
         </div>
     );
-  }
-}
-
+    }
 
 const styles = {
     container: {

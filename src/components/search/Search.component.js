@@ -1,23 +1,20 @@
-import React, { Component } from 'react'
+import React, { useState, useContext } from 'react'
+import GitHubContext from '../../context/github/gitHubContext';
 
-export default class Search extends Component {
-    state ={
-        username : '',
-    };
+export default function Search (props) {
+    const [ username, setUsername] = useState('');
+    const githubContext = useContext(GitHubContext);
     
-    mapInputToState = (e) => this.setState({[e.target.name] : e.target.value});
-    
-    onSearchClick = () => {
-        if (this.state.username) {
-            this.props.searchUsers(this.state.username);
-            this.setState({username : ''});
+    const onSearchClick = () => {
+        if (username) {
+            githubContext.searchUsers(username);
         }
     };
     
-    render() {
+    
         return (
             <div>
-                <div className = "container" style= {{marginTop : '15px'}}>
+                <div className = "container" >
                     <div className="form-horizontal">
                         <div className="form-group">
                             <div className="column col-10">
@@ -27,13 +24,13 @@ export default class Search extends Component {
                                 type="text" 
                                 id="input-example-1" 
                                 placeholder="Github user name..."
-                                onChange=  {this.mapInputToState}
+                                onChange=  {(e) => setUsername(e.target.value)}
                                 />
                             </div>
                             <div className="column col-2">
                                 <button 
                                 className="btn btn-primary btn-block" 
-                                onClick={this.onSearchClick}
+                                onClick={onSearchClick}
                                 >
                                     Search
                                 </button>
@@ -44,4 +41,4 @@ export default class Search extends Component {
             </div>
         )
     }
-}
+

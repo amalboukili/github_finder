@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
+import GitHubContext from '../../context/github/gitHubContext';
 
-function Alert({alert, setAlert}) {
+function Alert() {
+    const githubContext = useContext(GitHubContext);
+    const {alert, removeAlert}= githubContext;
     const { type, message } = alert;
     return message ? (
         <div className = "container">
             <div className = "columns">
                 <div className = "column col-12">
                     <div className={`toast toast-${type}`}>
-                        <button className="btn btn-clear float-right" onClick = {() => setAlert()}></button>
+                        <button 
+                        className="btn btn-clear float-right" 
+                        onClick = {()=> removeAlert()}
+                        ></button>
                         {message}
                     </div>
                 </div>

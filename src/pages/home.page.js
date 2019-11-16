@@ -9,17 +9,9 @@ import UsersGrid from '../components/users/UsersGrid.component';
 function Home(props) {
     return (
         <Fragment>
-            <Alert 
-                alert={props.alert}
-                setAlert={props.setAlert}
-            />
-            <Search 
-                searchUsers={props.searchUsers} 
-            />
-            <UsersGrid  
-                users={props.users} 
-                loading= {props.loading} 
-            />
+            <Alert />
+            <Search />
+            <UsersGrid />
         </Fragment>
     )
 }
